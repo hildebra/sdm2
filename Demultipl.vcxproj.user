@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='fastq|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\S13800.1.fastq,C:\Users\Falk\Documents\aPhD\data\test\PEseq\S13800.2.fastq -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='fastq|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\W15\W15a.fastq,C:\Users\Falk\SkyDrive\science\data\test\W15\W15b.fastq -o_fastq C:\Users\Falk\SkyDrive\science\data\test\W15\test.1.txt,C:\Users\Falk\SkyDrive\science\data\test\W15\test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\SkyDrive\science\data\test\W15\sdmO.txt -paired 2 -i_qual_offset 33</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='miSeq|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AnitaMiSeq|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Soil23S|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='extractSeq|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='extractFastaRemainderFile|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VDP|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='multiplexHiSeq|Win32'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falk\SkyDrive\science\data\test\greten/ -o_fastq C:\Users\Falk\SkyDrive\science\data\test\greten/test.fq -o_derepl C:\Users\Falk\SkyDrive\science\data\test\greten/derep.fna  </LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='hiSeqMoc|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExtens|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedDerepCnt|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExtensKlein|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\Documents\aPhD\data\test\PEseq\misq_smallt2.fna -o_fastq test.1.txt,test.2.txt -o_qual tte.txt,tte2.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='miSeq|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\PEseq\al.1.fq,C:\Users\Falk\SkyDrive\science\data\test\PEseq\al.2.fq;C:\Users\Falk\SkyDrive\science\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\SkyDrive\science\data\test\PEseq\misq_smallt2.fna -o_fastq C:\Users\Falk\SkyDrive\science\data\test\PEseq\test.1.txt,C:\Users\Falk\SkyDrive\science\data\test\PEseq\test.2.txt -options C:\Users\Falk\SkyDrive\science\data\test\PEseq\sdm_opt.txt -paired 2 -o_dereplicate C:\Users\Falk\SkyDrive\science\data\test\PEseq\derep.fas</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AnitaMiSeq|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falk\SkyDrive\science\data\test\anita/  -o_fna C:\Users\Falk\SkyDrive\science\data\test\anita/demulti.1.fna,C:\Users\Falk\SkyDrive\science\data\test\anita/demulti.2.fna -sample_sep __  -log C:\Users\Falk\SkyDrive\science\data\test\anita/demulti.log -map C:\Users\Falk\SkyDrive\science\data\test\anita/miSeqMap.sm.txt -options C:\Users\Falk\SkyDrive\science\data\test\VDP/sdm_miSeq.txt -o_dereplicate C:\Users\Falk\SkyDrive\science\data\test\anita/derep.fas -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 0 -o_qual_offset 33 -i_qual_offset auto -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Soil23S|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\Soil23s/read1.fastq,C:\Users\Falk\SkyDrive\science\data\test\Soil23s/read2.fastq  -o_fna C:\Users\Falk\SkyDrive\science\data\test\Soil23s/demulti.1.fna,C:\Users\Falk\SkyDrive\science\data\test\Soil23s/demulti.2.fna -sample_sep __  -log C:\Users\Falk\SkyDrive\science\data\test\Soil23s/demulti.log -map C:\Users\Falk\SkyDrive\science\data\test\Soil23s/map.txt -options C:\Users\Falk\SkyDrive\science\data\test\Soil23s/sdm_miSeq.txt -o_dereplicate C:\Users\Falk\SkyDrive\science\data\test\Soil23s/derep.fas -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='extractSeq|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\PEseq\misq_smallt1.fna,C:\Users\Falk\SkyDrive\science\data\test\PEseq\misq_smallt2.fna;C:\Users\Falk\SkyDrive\science\data\test\PEseq\misq_smallt12.fna,C:\Users\Falk\SkyDrive\science\data\test\PEseq\misq_smallt22.fna -o_fastq C:\Users\Falk\SkyDrive\science\data\test\PEseq\multiID\ -options C:\Users\Falk\SkyDrive\science\data\test\PEseq\sdm_opt.txt -paired 2 -specificReads C:\Users\Falk\SkyDrive\science\data\test\PEseq\miS_sm_subs.txt -log nolog</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='extractFastaRemainderFile|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\JK2\ -o_fastq C:\Users\Falk\Documents\aPhD\data\test\JK2\out.fastq -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -map C:\Users\Falk\Documents\aPhD\data\test\JK2\map.txt -sample_sep __  -o_dereplicate C:\Users\Falk\Documents\aPhD\data\test\JK2\mderep.fna -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 1  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1
+</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VDP|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\VDP\Sample_S1_L001_R1_001_small,C:\Users\Falk\SkyDrive\science\data\test\VDP\Sample_S1_L001_R2_001_small -i_MID_fastq C:\Users\Falk\SkyDrive\science\data\test\VDP\Sample_S1_L001_I1_001_small -o_fna C:\Users\Falk\SkyDrive\science\data\test\VDP\demulti.1.fna,C:\Users\Falk\SkyDrive\science\data\test\VDP\demulti.2.fna -sample_sep __  -log C:\Users\Falk\SkyDrive\science\data\test\VDP\demulti.log -map C:\Users\Falk\SkyDrive\science\data\test\VDP\Map.txt -options C:\Users\Falk\SkyDrive\science\data\test\VDP\sdm_miSeq.txt -o_qual_offset 33 -paired 2 -o_dereplicate C:\Users\Falk\SkyDrive\science\data\test\VDP\derep.fas -maxReadsPerOutput 4000000 -log nolog -min_derep_copies 2</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='multiplexHiSeq|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\testR1.fastq,C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\testR3.fastq  -i_MID_fastq C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\testR2.fastq -o_fastq C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\test.1.txt,C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\test.2.txt -options C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\sdm_miSeq.txt -map C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\map.txt -paired 2 -log C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\log.txt -o_dereplicate C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\derep.fna  -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -maxReadsPerOutput 100</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='hiSeqMoc|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\pairsSingl\p.1.fastq,C:\Users\Falk\SkyDrive\science\data\test\pairsSingl/p.2.fastq  -o_fastq C:\Users\Falk\SkyDrive\science\data\test\pairsSingl\test.1.txt,C:\Users\Falk\SkyDrive\science\data\test\pairsSingl\test.2.txt -options C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\sdm_miSeq.txt -paired 2</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExtens|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\VDP\Sample_S1_L001_R1_001_small,C:\Users\Falk\SkyDrive\science\data\test\VDP\Sample_S1_L001_R2_001_small -optimalRead2Cluster C:\Users\Falk\SkyDrive\science\data\test\VDP\testVDP.uc -o_fastq C:\Users\Falk\SkyDrive\science\data\test\VDP\seed.1.fna,C:\Users\Falk\SkyDrive\science\data\test\VDP\seed.2.fna -sample_sep __  -log C:\Users\Falk\SkyDrive\science\data\test\VDP\demulti.log -map C:\Users\Falk\SkyDrive\science\data\test\VDP\Map.txt -options C:\Users\Falk\SkyDrive\science\data\test\VDP\sdm_miSeq.txt -o_qual_offset 33 -paired 2 -OTU_fallback C:\Users\Falk\SkyDrive\science\data\test\VDP\tmp_otu.fa -otu_matrix C:\Users\Falk\SkyDrive\science\data\test\VDP\tmp_otuMat.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedDerepCnt|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\derep.hq.fq -o_fna C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\seeds.fna -paired 1 -sample_sep __ -derep_map C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\derep.map -o_qual_offset 33 -options C:\Users\Falk\SkyDrive\science\data\test\VDP/sdm_miSeq.txt -mergedPairs 0 -OTU_fallback C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\tmp_otu.fa -otu_matrix C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\outMat.txt -optimalRead2Cluster C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\finalOTU.uc -ucAdditionalCounts C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\finalOTU.uc.ADD</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExtensKlein|x64'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\SkyDrive\science\data\test\klein\test.fna -i_qual C:\Users\Falk\SkyDrive\science\data\test\klein\test.qual -optimalRead2Cluster C:\Users\Falk\SkyDrive\science\data\test\klein\test.uc -o_fna C:\Users\Falk\SkyDrive\science\data\test\klein\seed.1.fna -sample_sep __  -log C:\Users\Falk\SkyDrive\science\data\test\klein\seed.log -map C:\Users\Falk\SkyDrive\science\data\test\klein\Map.txt -options C:\Users\Falk\SkyDrive\science\data\test\VDP\sdm_miSeq.txt -o_qual_offset 33 -paired 1 -OTU_fallback C:\Users\Falk\SkyDrive\science\data\test\klein\tmp_otu.fa</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='454_16S|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='demulti|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Gloria|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='reformat|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='JulienMultInp|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DblBCs|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DblBcsRaul|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Buba2|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SoilV9|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FNAread|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='JulienFNA|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Anita|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MoSoFo|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='demultiplex2|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Cedric|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RemainderSeqs|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExUP8|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExUP9|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IdInHd|Win32'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\JK2\ -o_fastq C:\Users\Falk\Documents\aPhD\data\test\JK2\out.fastq -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -map C:\Users\Falk\Documents\aPhD\data\test\JK2\map.txt -sample_sep __  -o_dereplicate C:\Users\Falk\Documents\aPhD\data\test\JK2\mderep.fna -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 1  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1
+</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Greten16s|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Luc2|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='refClustMatrix|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AnhMice|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='HMP|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IDinHead|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna CC:\Users\Falk\SkyDrive\science\data\test\smtest.fna -o_fastq C:\Users\Falk\SkyDrive\science\data\test\test.1.txt -options C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\sdm_miSeq.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NoHdNoBc|Win32'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\Documents\aPhD\data\test\smtest.fna -o_fastq test.1.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='454_16S|x64'">
+    <LocalDebuggerCommandArguments>-i C:\Users\Falkh\OneDrive\science\data\test\JK2\shr1.fq,C:\Users\Falkh\OneDrive\science\data\test\JK2\shr2.fq -o_fastq C:\Users\Falkh\OneDrive\science\data\test\JK2\out.fastq,C:\Users\Falkh\OneDrive\science\data\test\JK2\out2.fastq -options C:\Users\falkh\OneDrive\science\data\test\JK2/sdm_opt.txt -map C:\Users\Falkh\OneDrive\science\data\test\JK2\map.txt -sample_sep __  -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\JK2\mderep.fna -dere_size_fmt 0 -min_derep_copies 2:1;5:4 -suppressOutput 0 -o_qual_offset 33 -paired 2 -maxReadsPerOutput 4000000 -oneLineFastaFormat 1 -log C:\Users\falkh\OneDrive\science\data\test\JK2/log</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='demulti|x64'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falkh\OneDrive\science\data\test\klein\test.fna -i_qual C:\Users\Falkh\OneDrive\science\data\test\klein\test.qual -o_demultiplex C:\Users\Falkh\OneDrive\science\data\test\klein\derep\ -map C:\Users\Falkh\OneDrive\science\data\test\klein\map.txt -sample_sep __  </LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Gloria|x64'">
+    <LocalDebuggerCommandArguments> -i_path C:\Users\falkh\OneDrive\science\data\test\gloria\  -o_fna C:\Users\falkh\OneDrive\science\data\test\gloria/demulti.1.fna,C:\Users\falkh\OneDrive\science\data\test\gloria/demulti.2.fna -sample_sep __  -log C:\Users\falkh\OneDrive\science\data\test\gloria/demulti.log -map C:\Users\falkh\OneDrive\science\data\test\gloria/16S_hiseq_mapa.txt -options C:\Users\falkh\OneDrive\science\data\test\gloria/sdm_16S.txt -o_dereplicate C:\Users\falkh\OneDrive\science\data\test\gloria/derep.fas -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 2  -maxReadsPerOutput 8000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='reformat|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\falkh\OneDrive\science\data\test\gloria\RH01.1.fastq,C:\Users\falkh\OneDrive\science\data\test\gloria\RH01.2.fastq  -o_fna C:\Users\falkh\OneDrive\science\data\test\gloria/refor.1.fna,C:\Users\falkh\OneDrive\science\data\test\gloria/refor.2.fna -o_qual C:\Users\falkh\OneDrive\science\data\test\gloria/refor.1.qual,C:\Users\falkh\OneDrive\science\data\test\gloria/refor.2.qual</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='JulienMultInp|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falkh\OneDrive\science\data\test\Julien/  -o_fna C:\Users\Falkh\OneDrive\science\data\test\Julien//demulti.1.fna,C:\Users\Falkh\OneDrive\science\data\test\Julien//demulti.2.fna -sample_sep __  -log C:\Users\Falkh\OneDrive\science\data\test\Julien/demulti.log -map C:\Users\Falkh\OneDrive\science\data\test\Julien/map.txt -options C:\Users\Falkh\OneDrive\science\data\test\Julien\sdm_miSeq.txt -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\Julien//derep.fas -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DblBCs|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falkh\OneDrive\science\data\test\buba/r1.fastq,C:\Users\Falkh\OneDrive\science\data\test\buba/r2.fastq -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\buba/test.derep.txt -o_fastq C:\Users\Falkh\OneDrive\science\data\test\buba/test.1.txt,C:\Users\Falkh\OneDrive\science\data\test\buba/test.2.txt -options C:\Users\Falkh\OneDrive\science\data\test\buba/sdm_miSeq_cdhit.txt -map C:\Users\Falkh\OneDrive\science\data\test\buba/map.txt -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 0 -o_qual_offset 33 -i_qual_offset auto -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1 -log C:\Users\Falkh\OneDrive\science\data\test\buba/dem.log</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DblBcsRaul|x64'">
+    <LocalDebuggerCommandArguments>-o_fastq C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/r1.fastq,C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/r2.fastq -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/test.derep.txt -i_fastq C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/test.F1.fq,C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/test.F2.fq -options C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/sdm_miSeqFR.txt  -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 0 -o_qual_offset 33 -i_qual_offset auto -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1 -log C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/dem.log -map C:\Users\Falkh\OneDrive\science\data\test\Raul_dblBC/mapA.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Buba2|x64'">
+    <LocalDebuggerCommandArguments>-i C:\Users\Falkh\OneDrive\science\data\test\buba/buba2/B2R1.fastq,C:\Users\Falkh\OneDrive\science\data\test\buba/buba2/B2R2.fastq -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\buba/test.derep.txt -o_fastq C:\Users\Falkh\OneDrive\science\data\test\buba/test.1.txt,C:\Users\Falkh\OneDrive\science\data\test\buba/test.2.txt -options C:\Users\Falkh\OneDrive\science\data\test\buba/sdm_miSeq_cdhit.txt -map C:\Users\Falkh\OneDrive\science\data\test\buba/buba2/map.txt -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 0 -o_qual_offset 33 -i_qual_offset auto -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1 -log C:\Users\Falkh\OneDrive\science\data\test\buba/dem.log</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SoilV9|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\falkh\OneDrive\science\data\test\soilv9\ -log C:\Users\falkh\OneDrive\science\data\test\soilv9/tt2.log -o_fna C:\Users\falkh\OneDrive\science\data\test\soilv9/demulti.1.fna,C:\Users\falkh\OneDrive\science\data\test\soilv9/demulti.2.fna -sample_sep ___  -map C:\Users\falkh\OneDrive\science\data\test\soilv9/Soilv9.sm.map  -o_demultiplex C:\Users\falkh\OneDrive\science\data\test\soilv9\dem -o_dereplicate C:\Users\falkh\OneDrive\science\data\test\soilv9/derep.fas -dere_size_fmt 0 -min_derep_copies 5:2,3:3 -suppressOutput 1  -o_qual_offset 33 -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1 -options C:\Users\Falkh\OneDrive\science\data\test\buba/sdm_miSeq_cdhit.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FNAread|x64'">
+    <LocalDebuggerCommandArguments>-i C:\Users\falkh\OneDrive\science\data\test\FNAread\4449125.3.fq.1 -o_fastq C:\Users\falkh\OneDrive\science\data\test\FNAread\filtered.s.fastq -options C:\Users\falkh\OneDrive\science\data\test\FNAread\sdmo_100.txt -paired 1  -log C:\Users\falkh\OneDrive\science\data\test\FNAread\filter.log  -ignore_IO_errors 1 -i_qual_offset auto -binomialFilterBothPairs 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='JulienFNA|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falkh\OneDrive\science\data\test\Julien/  -o_fna C:\Users\Falkh\OneDrive\science\data\test\Julien//demulti.1.fna,C:\Users\Falkh\OneDrive\science\data\test\Julien//demulti.2.fna -sample_sep __  -log C:\Users\Falkh\OneDrive\science\data\test\Julien/demulti.log -map C:\Users\Falkh\OneDrive\science\data\test\Julien/map.txt -options C:\Users\Falkh\OneDrive\science\data\test\Julien\sdm_miSeq.txt -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\Julien//derep.fas -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Anita|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falkh\OneDrive\science\data\test\anita/  -o_fna C:\Users\Falkh\OneDrive\science\data\test\anita/demulti.1.fna,C:\Users\Falkh\OneDrive\science\data\test\anita/demulti.2.fna -sample_sep __  -log C:\Users\Falkh\OneDrive\science\data\test\anita/demulti.log -map C:\Users\Falkh\OneDrive\science\data\test\anita/miSeqMap.sm.txt -options C:\Users\Falkh\OneDrive\science\data\test\anita/sdm_miSeq.txt -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\anita/derep.fas -dere_size_fmt 0 -min_derep_copies 7:2,5:3 -suppressOutput 0 -o_qual_offset 33 -i_qual_offset auto -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MoSoFo|x64'">
+    <LocalDebuggerCommandArguments>-o_fastq_noBC C:\Users\falkh\OneDrive\science\data\test\MoSoFo/noBC1.fq,C:\Users\falkh\OneDrive\science\data\test\MoSoFo/noBC2.fq -i_path C:\Users\falkh\OneDrive\science\data\test\MoSoFo  -o_fastq C:\Users\falkh\OneDrive\science\data\test\MoSoFo/tmpFiles//demulti.1.fq,C:\Users\falkh\OneDrive\science\data\test\MoSoFo//tmpFiles//demulti.2.fq -sample_sep ___  -log C:\Users\falkh\OneDrive\science\data\test\MoSoFo//demulti.log -map C:\Users\falkh\OneDrive\science\data\test\MoSoFo/map.txt -options C:\Users\falkh\OneDrive\science\data\test\MoSoFo/sdm_miSeq_moh.txt  -o_dereplicate C:\Users\falkh\OneDrive\science\data\test\MoSoFo/derep.fas -dere_size_fmt 0 -min_derep_copies 8:1,4:2,3:3 -suppressOutput 1  -o_qual_offset 33 -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='demultiplex2|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falkh\OneDrive\science\data\test\anita/ -o_demultiplex C:\Users\Falkh\OneDrive\science\data\test\anita/demulti -o_fna C:\Users\Falkh\OneDrive\science\data\test\anita/demulti.1.fna,C:\Users\Falkh\OneDrive\science\data\test\anita/demulti.2.fna -sample_sep __  -log C:\Users\Falkh\OneDrive\science\data\test\anita/demulti.log -map C:\Users\Falkh\OneDrive\science\data\test\anita/miSeqMap.sm.txt -options C:\Users\Falkh\OneDrive\science\data\test\anita/sdm_miSeq.txt -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\anita/derep.fas -dere_size_fmt 0 -min_derep_copies 7:2,5:3 -suppressOutput 0 -o_qual_offset 33 -i_qual_offset auto -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Cedric|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\falkh\OneDrive\science\data\test\cedric/  -o_fna C:\Users\falkh\OneDrive\science\data\test\cedric/demulti.1.fna,C:\Users\falkh\OneDrive\science\data\test\cedric/demulti.2.fna -sample_sep __  -log C:\Users\falkh\OneDrive\science\data\test\cedric/demulti.log -map C:\Users\falkh\OneDrive\science\data\test\cedric/mapsm.txt -options C:\Users\falkh\OneDrive\science\data\test\cedric/sdm_miSeq.txt -o_dereplicate C:\Users\falkh\OneDrive\science\data\test\cedric/derep.fas -dere_size_fmt 0 -min_derep_copies 1 -suppressOutput 0 -o_qual_offset 33 -i_qual_offset auto -paired 2  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RemainderSeqs|x64'">
+    <LocalDebuggerCommandArguments>-i_fna C:\Users\Falk\SkyDrive\science\data\test\klein\test.fna -o_fna C:\Users\Falk\SkyDrive\science\data\test\klein\Extract\ -paired 1 -specificReads C:\Users\Falk\SkyDrive\science\data\test\klein\klein_subs.txt -excludeFile C:\Users\Falk\SkyDrive\science\data\test\klein\Extract\others.fna
+</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExUP8|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\derep.hq.fq,C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\derep.2.hq.fq -optimalRead2Cluster C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\uparse.up -o_fastq C:\Users\Falkh\OneDrive\science\data\test\\uparse8SeedExt\seed.1.fna,C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\seed.2.fna -sample_sep __  -log C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\demulti.log -options C:\Users\Falkh\OneDrive\science\data\test\VDP\sdm_miSeq.txt -o_qual_offset 33 -paired 2 -OTU_fallback C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\tmp_otu.fa -otu_matrix C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\mat.txt -derep_map C:\Users\Falkh\OneDrive\science\data\test\uparse8SeedExt\derep.map -count_chimeras T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SeedExUP9|x64'">
+    <LocalDebuggerCommandArguments>-o_fastq - -i_fastq C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt\derep.hq.fq -ucAdditionalCounts1 C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt/finalOTU.uc.REST -optimalRead2Cluster C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt/finalOTU.uc -ucAdditionalCounts C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt/finalOTU.uc.ADD -sample_sep __  -log C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt\demulti.log -options C:\Users\Falkh\OneDrive\science\data\test\VDP\sdm_miSeq.txt -o_qual_offset 33 -paired 1 -OTU_fallback C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt\tmp_otu.fa -otu_matrix C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt\mat.txt -derep_map C:\Users\Falkh\OneDrive\science\data\test\uparse9SeedExt\derep.map -count_chimeras T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IdInHd|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\JK2\ -o_fastq C:\Users\Falk\Documents\aPhD\data\test\JK2\out.fastq -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -map C:\Users\Falk\Documents\aPhD\data\test\JK2\map.txt -sample_sep __  -o_dereplicate C:\Users\Falk\Documents\aPhD\data\test\JK2\mderep.fna -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 1  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1
+</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Greten16s|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falkh\OneDrive\science\data\test\greten\ -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\greten\184/test.derep.txt -o_fastq C:\Users\Falkh\OneDrive\science\data\test\greten\184/test.1.txt -options C:\Users\Falkh\OneDrive\science\data\AnhMIce\sdm_options.txt -map C:\Users\Falkh\OneDrive\science\data\test\greten\BCs.txt -threads 1 -maxReadsPerOutput 3000000  -suppressOutput 1 -min_derep_copies 2:1;5:4</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Luc2|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\falkh\OneDrive\science\data\test\lucas -o_fastq C:\Users\falkh\OneDrive\science\data\test\lucas\r1.fq,C:\Users\falkh\OneDrive\science\data\test\lucas\r2.fq -map C:\Users\falkh\OneDrive\science\data\test\lucas\test_bioinfo_map.txt -paired 2 -saveDemultiplex 1 -o_demultiplex C:\Users\falkh\OneDrive\science\data\test\lucas\dem\</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='refClustMatrix|x64'">
+    <LocalDebuggerCommandArguments> -i_fastq C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/derep.hq.fq -o_fna C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/res/otu_seeds.fna -optimalRead2Cluster C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/finalOTU.uc -optimalRead2Cluster_ref C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/finalOTU.uc.ref -paired 1 -sample_sep __ -derep_map C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/derep.map -options C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/sdm_454.txt -o_qual_offset 33 -log C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/res/SeedExtensionStats.txt -mergedPairs 0 -OTU_fallback C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/tmp_otu.fa -ucAdditionalCounts C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/finalOTU.uc.ADD -ucAdditionalCounts1 C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/finalOTU.uc.REST -otu_matrix C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/res/OTU.txt -count_chimeras F -OTU_fallback_refclust C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/tmp_otu.fa.ref -ucAdditionalCounts_refclust C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/finalOTU.uc.ADDREF -ucAdditionalCounts_refclust1 C:/Users/falkh/OneDrive/science/data/test/refClustMatrix/finalOTU.uc.RESTREF</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AnhMice|x64'">
+    <LocalDebuggerCommandArguments>-optimalRead2Cluster C:\Users\Falk\SkyDrive\science\data\uclinks/finalOTU.uc -i_path C:\Users\Falk\SkyDrive\science\data\AnhMIce -o_fna C:\Users\Falk\SkyDrive\science\data\AnhMIce\out.fastq -options C:\Users\Falk\SkyDrive\science\data\AnhMIce\sdm_options.txt -map C:\Users\Falk\SkyDrive\science\data\AnhMIce\map.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='HMP|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falk\SkyDrive\science\data\test\HMP -o_fna C:\Users\Falk\SkyDrive\science\data\test\HMP\out.fastq -options C:\Users\Falk\SkyDrive\science\data\AnhMIce\sdm_options.txt -map C:\Users\Falk\SkyDrive\science\data\test\HMP\v35_sm.txt -o_dereplicate C:\Users\Falk\SkyDrive\science\data\test\HMP\test_derep.fna</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IDinHead|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falkh\OneDrive\science\data\test\JK2\ -o_fastq C:\Users\Falkh\OneDrive\science\data\test\JK2\out.fastq -options C:\Users\Falkh\OneDrive\science\data\test\sdm_miSeq.txt -map C:\Users\Falkh\OneDrive\science\data\test\JK2\map.txt -sample_sep __  -o_dereplicate C:\Users\Falkh\OneDrive\science\data\test\JK2\mderep.fna -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1 -o_qual_offset 33 -paired 1  -maxReadsPerOutput 4000000 -oneLineFastaFormat 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NoHdNoBc|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\derep.hq.fq -o_fna C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\seeds.fna -paired 1 -sample_sep __ -derep_map C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\derep.map -map C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\map_sm.txt -o_qual_offset 33 -options C:\Users\Falk\SkyDrive\science\data\test\VDP/sdm_miSeq.txt -mergedPairs 0 -OTU_fallback C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\tmp_otu.fa -otu_matrix C:\Users\Falk\SkyDrive\science\data\test\AnDereCnt\outMat.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PathOpt|Win32'">
+    <LocalDebuggerCommandArguments>-i_path C:/Users/Falk/Documents/aPhD/data/test/ -map "C:/Users/Falk/Documents/aPhD/data/test/qiime_tutorial-v1.0.0/Fasting_Map.txt" -o_fna C:/Users/Falk/Documents/aPhD/data/test/XXX.fna -options C:\Users\Falk\workspace\ddm\sdm_options2.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PathOpt|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falk\SkyDrive\science\data\test -map "C:\Users\Falk\SkyDrive\science\data\test/qiime_tutorial-v1.0.0/Fasting_Map.txt" -o_fna C:\Users\Falk\SkyDrive\science\data\test/XXX.fna</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='irish|Win32'">
+    <LocalDebuggerCommandArguments>-sample_sep _X_  -i_path C:\Users\Falk\Documents\aPhD\data\Irish16S/ -map C:\Users\Falk\Documents\aPhD\data\Irish16S/irMAP_test.txt -options C:\Users\Falk\workspace\ddm\sdm_options.txt -o_fna C:/Users/Falk/Documents/aPhD/data/test/XXX.fna</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='irish|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falk\SkyDrive\science\data\Irish16S/ -map C:\Users\Falk\SkyDrive\science\data\Irish16S/irMAP_test.txt -options C:\Users\Falk\SkyDrive\science\data\Irish16S\sdm_ir.txt -o_fastq C:\Users\Falk\SkyDrive\science\data/test/XXX.fna -threads 1 -i_path C:\Users\Falk\SkyDrive\science\data\Irish16S/ -map C:\Users\Falk\SkyDrive\science\data\Irish16S/irMAP_test.txt -options C:\Users\Falk\SkyDrive\science\data\Irish16S\sdm_ir.txt -o_fna C:\Users\Falk\SkyDrive\science\data/test/XXX.fna -threads 1  -o_dereplicate C:\Users\Falk\SkyDrive\science\data/test/derep.fna -dere_size_fmt 0 -min_derep_copies 2 -suppressOutput 1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='numbers|Win32'">
+    <LocalDebuggerCommandArguments>-prefix falk -i_fna C:/Users/Falk/Documents/aPhD/data/test/Fasting_Example.fna -number T -o_fna C:/Users/Falk/Documents/aPhD/data/test/XXX.fna</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='numbers|x64'">
+    <LocalDebuggerCommandArguments>-prefix falk -i_fna C:/Users/Falk/Documents/aPhD/data/test/Fasting_Example.fna -number T -o_fna C:/Users/Falk/Documents/aPhD/data/test/XXX.fna</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falk\Documents\aPhD\data\Irish16S/ -map C:\Users\Falk\Documents\aPhD\data\Irish16S/irMAP_test.txt -options C:\Users\Falk\workspace\ddm\sdm_options.txt -o_fna C:/Users/Falk/Documents/aPhD/data/test/XXX.fna</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\Falk\Documents\aPhD\data\Irish16S/ -map C:\Users\Falk\Documents\aPhD\data\Irish16S/irMAP_test.txt -options C:\Users\Falk\workspace\ddm\sdm_options.txt -o_fastq C:/Users/Falk/Documents/aPhD/data/test/XXX.fna -threads 4</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='hiSeqMocat|x64'">
+    <LocalDebuggerCommandArguments>-i_fastq C:\Users\Falk\SkyDrive\science\data\test\pairsSingl\p.1.fastq,C:\Users\Falk\SkyDrive\science\data\test\pairsSingl/p.2.fastq  -o_fastq C:\Users\Falk\SkyDrive\science\data\test\pairsSingl\test.1.txt,C:\Users\Falk\SkyDrive\science\data\test\pairsSingl\test.2.txt -options C:\Users\Falk\SkyDrive\science\data\test\hiSeq_16\sdm_miSeq.txt -paired 2</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='lucas|Win32'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\falkh\OneDrive\science\data\test\lucas -o_fastq test.1.txt,test.2.txt -map C:\Users\falkh\OneDrive\science\data\test\lucas\test_bioinfo_map.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired 2</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='lucas|x64'">
+    <LocalDebuggerCommandArguments>-i_path C:\Users\falkh\OneDrive\science\data\test\lucas -o_fastq test.1.txt,test.2.txt -map C:\Users\falkh\OneDrive\science\data\test\lucas\test_bioinfo_map.txt -options C:\Users\Falk\workspace\ddm\sdm_options2.txt -paired T</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>
