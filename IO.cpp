@@ -19,18 +19,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "IO.h"
 //#include <map>
-void threadAnalyzeDNA(shared_ptr<DNA> tdn, shared_ptr<MultiDNA> MD,int thrCnt){
+void threadAnalyzeDNA(shared_ptr<DNA> tdn, shared_ptr<OutputStreamer> MD,int thrCnt){
 	//if (threadActive){
 	//	threads[thrCnt].join();
 	//}
 	//threads[thrdsCnt] = 
 
-	//auto f1 = std::async(&MultiDNA::analyzeDNA,this,tdn);
+	//auto f1 = std::async(&OutputStreamer::analyzeDNA,this,tdn);
 	int tagIdx(-2);
 	MD->analyzeDNA(tdn,thrCnt,-1,tagIdx);
 	MD->saveForWrite(tdn);
 }
-/*void trippleThreadAnalyzeDNA(shared_ptr<MultiDNA> MD, shared_ptr<DNA> tdn,shared_ptr<DNA> tdn2,
+/*void trippleThreadAnalyzeDNA(shared_ptr<OutputStreamer> MD, shared_ptr<DNA> tdn,shared_ptr<DNA> tdn2,
 							 shared_ptr<DNA> MIDseq,bool changePHead){//,int thrCnt){
 
 
@@ -50,7 +50,7 @@ void threadAnalyzeDNA(shared_ptr<DNA> tdn, shared_ptr<MultiDNA> MD,int thrCnt){
 
 }*/
 
-void read_single(OptContainer& cmdArgs, shared_ptr<MultiDNA> MD, shared_ptr<InputStreamer> IS){
+void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_ptr<InputStreamer> IS){
 	//output files
 #ifdef _THREADED
 	int Nthrds = atoi(cmdArgs["-threads"].c_str()) -2 ;
@@ -128,6 +128,8 @@ void read_single(OptContainer& cmdArgs, shared_ptr<MultiDNA> MD, shared_ptr<Inpu
 		MD->depPrep(tdn1,NULL);
 		curFil->write2Demulti(tdn1, 0,MD->getfastQoutVer());
 
+
+		//first save read in mem, then write if enough reads accumulate in mem
 		if (!MD->saveForWrite(tdn1)) {
 			cont = false;
 			break;
@@ -152,7 +154,7 @@ void read_single(OptContainer& cmdArgs, shared_ptr<MultiDNA> MD, shared_ptr<Inpu
 
 //is called from a while loop, that reads the DNA pairs
 bool read_paired_DNAready(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2, shared_ptr<DNA> MIDseq, 
-	bool MIDuse, shared_ptr<MultiDNA> MD, int& revConstellation) {
+	bool MIDuse, shared_ptr<OutputStreamer> MD, int& revConstellation) {
 	
 	if (tdn == NULL) { return true; } //|| tdn->length()==0
 
@@ -347,7 +349,7 @@ bool read_paired_DNAready(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2, shared_ptr<
 	return true;
 }
 
-bool read_paired(OptContainer& cmdArgs, shared_ptr<MultiDNA> MD, 
+bool read_paired(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, 
 	shared_ptr<InputStreamer> IS, bool MIDuse) {
 	DNAmap oldMIDs;
 	bool fqHeadVer(true);
@@ -879,7 +881,11 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 			// main loop that goes over different files
 	int maxRds = mainFil->getXreads();
 	int totReadsRead(0);
-	for (unsigned int i=0; i<uniqueFas.size();i++ ){
+	//---------------------------------
+	//uniqueFas: unique input fastx's, can be demultiplexed fastas, or un-demultiplexed (several) fastx
+	//loop that goes over several input fq's
+	//------------------------------------
+	for (uint i=0; i<uniqueFas.size();i++ ){
 #ifdef DEBUG
 		cerr << "new filter in round "<<i << endl;
 #endif
@@ -921,7 +927,7 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 		if (tarID==-1){cerr<<"tar == -1. abort.\n";exit(10);}
 
 		//initialize object to handle all input file combinations
-		
+		//main input of fastx, handles input IO
 		shared_ptr<InputStreamer> IS = make_shared<InputStreamer>(!bFASTQ, mainFil->getuserReqFastqVer(), 
 			cmdArgs["-ignore_IO_errors"], cmdArgs["-pairedRD_HD_out"]);
 		if (tarSi < 2 && uniqueFas.size() > 1) {
@@ -940,15 +946,15 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 
 		if (mainFil->doOptimalClusterSeq()){
 			ucl->findSeq2UCinstruction(IS,bFASTQ,mainFil);
-			continue;
+			continue;// after this is only qual filter, not required from this point on
 		} 
 
 
 #ifdef DEBUG
 		cerr << "Setting up output" << endl;
 #endif
-		//MultiDNA MD = MultiDNA(&fil, cmdArgs, writeStatus, RDSset);
-		shared_ptr<MultiDNA> MD = make_shared<MultiDNA>(fil, cmdArgs, writeStatus, RDSset);
+		//OutputStreamer MD = OutputStreamer(&fil, cmdArgs, writeStatus, RDSset);
+		shared_ptr<OutputStreamer> MD = make_shared<OutputStreamer>(fil, cmdArgs, writeStatus, RDSset);
 		fil->setMultiDNA(MD);
 		if (maxRds > 0) { MD->setReadLimit(maxRds - totReadsRead); }
 		writeStatus = ofstream::app;
@@ -1032,10 +1038,15 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 #ifdef DEBUG
 		cerr << "Delete tmp filter" << endl;
 #endif
-		//and cleanup
-		//
-		//fil;
 	}
+
+
+	//-------------------------------------------------
+	//reading of input fq's is done
+	//postprocessing, write reads, dereplicates etc
+	// ------------------------------------------------
+
+
 #ifdef DEBUG
 	cerr << "Prep final logging" << endl;
 #endif
@@ -1058,6 +1069,7 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 		}
 		if (cmdArgs["-ucAdditionalCounts_refclust"] != ""){
 			//reference based clustering has some high qual seqs (no replacement with reads..)
+			//replace even found high qual hits with these default seeds..
 			shared_ptr<InputStreamer> FALL = make_shared<InputStreamer>(true, 
 				mainFil->getuserReqFastqVer(), cmdArgs["-ignore_IO_errors"], cmdArgs["-pairedRD_HD_out"]);
 			//this reads in the SLV fna's & creates matrix entries for these
@@ -1084,12 +1096,12 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 			ucl->writeOTUmatrix(cmdArgs["-otu_matrix"], mainFil);
 		}
 		//needs to be written after OTU matrix (renaming scheme)
-		shared_ptr<MultiDNA> MD = make_shared<MultiDNA>(mainFil, cmdArgs, ios::out, RDSset);
+		shared_ptr<OutputStreamer> MD = make_shared<OutputStreamer>(mainFil, cmdArgs, ios::out, RDSset);
 		mainFil->setMultiDNA(MD);
 		ucl->writeNewSeeds(MD, mainFil,false);
 		//delete MD;
 		//new fastas also need to be written..
-		MD.reset(new MultiDNA(mainFil, cmdArgs, ios::out, RDSset, ".ref", 1));//force fna output
+		MD.reset(new OutputStreamer(mainFil, cmdArgs, ios::out, RDSset, ".ref", 1));//force fna output
 		mainFil->setMultiDNA( MD );
 		ucl->writeNewSeeds(MD, mainFil,true,true);
 		//delete MD;

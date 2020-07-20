@@ -209,7 +209,7 @@ RemainderStrPos(-1), newHD(0), outFiles(0), outFilesIdx(0) {
 
 }
 
-void ReadSubset::findMatches(shared_ptr<InputStreamer> IS, shared_ptr<MultiDNA> MD, bool mocatFix) {
+void ReadSubset::findMatches(shared_ptr<InputStreamer> IS, shared_ptr<OutputStreamer> MD, bool mocatFix) {
 	shared_ptr<DNA> match(NULL); shared_ptr<DNA> match2(NULL);
 	bool cont(true), cont2(true);
 	int idx(0);
@@ -267,7 +267,7 @@ void ReadSubset::findMatches(shared_ptr<InputStreamer> IS, shared_ptr<MultiDNA> 
 
 
 
-MultiDNA::MultiDNA(shared_ptr<Filters> fil,OptContainer& cmdArgs, 
+OutputStreamer::OutputStreamer(shared_ptr<Filters> fil,OptContainer& cmdArgs, 
 	std::ios_base::openmode writeStatus, shared_ptr<ReadSubset> RDSset, 
 	string fileExt,int forceFmt) :
 		MFil(fil),subFilter(0),DNAsP1(0),DNAsP2(0),DNAsS1(0),DNAsS2(0),
@@ -311,10 +311,10 @@ MultiDNA::MultiDNA(shared_ptr<Filters> fil,OptContainer& cmdArgs,
 	//threads = futures(num_threads);
 	//if (pairedSeq){cerr<<"paired MFil\n";}
 }
-MultiDNA::~MultiDNA(){
+OutputStreamer::~OutputStreamer(){
 		//delete MFil;
 #ifdef DEBUG
-	cerr << "Destr MultiDNA" ;
+	cerr << "Destr OutputStreamer" ;
 #endif
 	delAllDNAvectors();
 #ifdef DEBUG
@@ -330,7 +330,7 @@ MultiDNA::~MultiDNA(){
 #endif
 	//delete optim;
 }
-void MultiDNA::delAllDNAvectors(){
+void OutputStreamer::delAllDNAvectors(){
 #ifdef DEBUG
 	cerr << "cleaning MD..";
 #endif
@@ -355,7 +355,7 @@ void MultiDNA::delAllDNAvectors(){
 }
 
 
-void MultiDNA::analyzeDNA(shared_ptr<DNA> d, int FilterUse, int pair,int& idx) {
+void OutputStreamer::analyzeDNA(shared_ptr<DNA> d, int FilterUse, int pair,int& idx) {
 	if (d==NULL){
 		return ;
 	}
@@ -387,7 +387,7 @@ void MultiDNA::analyzeDNA(shared_ptr<DNA> d, int FilterUse, int pair,int& idx) {
 	//count this as failure if BC was present
 	//d->prepareWrite(fastQoutVer);
 }
-vector<bool> MultiDNA::analyzeDNA(shared_ptr<DNA> p1, shared_ptr<DNA> p2, shared_ptr<DNA> mid,
+vector<bool> OutputStreamer::analyzeDNA(shared_ptr<DNA> p1, shared_ptr<DNA> p2, shared_ptr<DNA> mid,
 	bool changePHead, int FilterUse){
 	cerr << "deprecated analuze DNA"; exit(2323);
 	vector<bool> ret(2, true);
@@ -423,7 +423,7 @@ vector<bool> MultiDNA::analyzeDNA(shared_ptr<DNA> p1, shared_ptr<DNA> p2, shared
 	return ret;
 }
 
-bool MultiDNA::checkFastqHeadVersion(shared_ptr<DNA> d,bool disable){
+bool OutputStreamer::checkFastqHeadVersion(shared_ptr<DNA> d,bool disable){
 	b_changeFQheadVer = false;
 	if (pairedSeq==1){return false;}
 	int fastQheadVer = 0;
@@ -447,7 +447,7 @@ bool MultiDNA::checkFastqHeadVersion(shared_ptr<DNA> d,bool disable){
 
 
 
-void MultiDNA::writeAllStoredDNA(){
+void OutputStreamer::writeAllStoredDNA(){
 #ifdef DEBUG
 	printStorage();
 	cerr << "Writting stored DNA" << DNAsP1.size() <<" " <<DNAsP2.size()<<endl;
@@ -457,7 +457,7 @@ void MultiDNA::writeAllStoredDNA(){
 	if (writeThreadStatus>0){
 		if (writeThreadStatus>1){wrThread.join();}
 		writeThreadStatus++;
-		wrThread = thread(&MultiDNA::writeAllStoredDNA2t,this);
+		wrThread = thread(&OutputStreamer::writeAllStoredDNA2t,this);
 	} else {
 		writeAllStoredDNA2();
 	}
@@ -465,7 +465,7 @@ void MultiDNA::writeAllStoredDNA(){
 		writeAllStoredDNA2();
 #endif
 }
-void MultiDNA::writeAllStoredDNA2(){
+void OutputStreamer::writeAllStoredDNA2(){
 	mem_used=false;
 	//
 	if (b_writePassed) {
@@ -531,7 +531,7 @@ void MultiDNA::writeAllStoredDNA2(){
 #endif
 }
 #ifdef _THREADED
-void MultiDNA::writeAllStoredDNA2t(){
+void OutputStreamer::writeAllStoredDNA2t(){
     std::lock_guard<std::mutex> guard(mutex);
 	write2File=true;mem_used=false;
 	if (DNAsP1.size() != DNAsP2.size()){
@@ -558,7 +558,7 @@ void MultiDNA::writeAllStoredDNA2t(){
 	DNAsS1.resize(0);DNAsS2.resize(0);
 }
 #endif
-void MultiDNA::incrementOutputFile(){
+void OutputStreamer::incrementOutputFile(){
 	MFil->incrementFileIncrementor();
 	this->closeOutStreams(true);
 	//this is definetely a new file
@@ -642,7 +642,7 @@ void Filters::addDNAtoCStats(shared_ptr<DNA> d,int Pair) {
 	
 
 }
-bool  MultiDNA::saveForWrite(shared_ptr<DNA> d,int Pair){
+bool  OutputStreamer::saveForWrite(shared_ptr<DNA> d,int Pair){
 	//second most important part: collect stats on DNA passing through here (should be all read)
 	//most important part: save DNA to be written later (or discard)
 	if (d == NULL || stopAll) {
@@ -655,7 +655,7 @@ bool  MultiDNA::saveForWrite(shared_ptr<DNA> d,int Pair){
 
 		if (b_writePassed){
 			d->prepareWrite(fastQoutVer);
-			//lock MultiDNA
+			//lock OutputStreamer
 #ifdef _THREADED
 			std::lock_guard<std::mutex> guard(mutex);
 #endif
@@ -719,7 +719,7 @@ bool  MultiDNA::saveForWrite(shared_ptr<DNA> d,int Pair){
 	}
 	return !stopAll;
 }
-void MultiDNA::writeAndDel(shared_ptr<DNA> d,int Pair){
+void OutputStreamer::writeAndDel(shared_ptr<DNA> d,int Pair){
 	//ofstream tmpS, tmpQ, tmpFQ;
 //	int PairC = Pair;
 //	if (Pair > 1) {
@@ -769,7 +769,7 @@ void MultiDNA::writeAndDel(shared_ptr<DNA> d,int Pair){
 //	delete d;
 
 }
-void MultiDNA::writeSelectiveStream(shared_ptr<DNA> d, int Pair,int FS) {
+void OutputStreamer::writeSelectiveStream(shared_ptr<DNA> d, int Pair,int FS) {
 	//ofstream tmpS, tmpQ, tmpFQ;
 	if (d == 0) {
 		return;
@@ -810,7 +810,7 @@ void MultiDNA::writeSelectiveStream(shared_ptr<DNA> d, int Pair,int FS) {
 //	delete d;
 
 }
-void MultiDNA::writeNonBCReads(shared_ptr<DNA> d, shared_ptr<DNA> d2) {
+void OutputStreamer::writeNonBCReads(shared_ptr<DNA> d, shared_ptr<DNA> d2) {
 	if (fqNoBCFile.size() == 2) {
 		if (!d->getBarcodeDetected() && !d2->getBarcodeDetected()) {
 			if ((!d->getBarcodeDetected() && d2->getBarcodeDetected()) ||
@@ -823,21 +823,21 @@ void MultiDNA::writeNonBCReads(shared_ptr<DNA> d, shared_ptr<DNA> d2) {
 	}
 }
 
-void MultiDNA::setSubfilters(int num){
+void OutputStreamer::setSubfilters(int num){
 	if (num<2){return;}
 	subFilter.resize(num);
 	for (uint i=0;i<subFilter.size();i++){
 		subFilter[i].reset(new Filters(MFil,true));
 	}
 }
-void MultiDNA::mergeSubFilters(){
+void OutputStreamer::mergeSubFilters(){
 	vector<int> idx (MFil->Barcode.size(),0);
 	for (uint i=0;i<idx.size();i++){idx[i]=i;}
 	for (uint i=0; i<subFilter.size();i++){
 		MFil->addStats(subFilter[i],idx);
 	}
 }
-void MultiDNA::attachDereplicator(shared_ptr<Dereplicate> de) {
+void OutputStreamer::attachDereplicator(shared_ptr<Dereplicate> de) {
 	if (de != NULL) { 
 		Derepl = de; b_doDereplicate = true; 
 		Derepl->setPaired(pairedSeq>1); 
@@ -852,14 +852,14 @@ void MultiDNA::attachDereplicator(shared_ptr<Dereplicate> de) {
 	}
 }
 
-/*void MultiDNA::depPrep(shared_ptr<DNA> tdn) {
+/*void OutputStreamer::depPrep(shared_ptr<DNA> tdn) {
 
 	if (b_doDereplicate && tdn->isPassed()) {
 		cntDerep++;
 		Derepl->addDNA(tdn);
 	}
 }*/
-void MultiDNA::depPrep(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2) {
+void OutputStreamer::depPrep(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2) {
 	bool added = false;
 	if (!b_doDereplicate) {
 		return;
@@ -875,7 +875,7 @@ void MultiDNA::depPrep(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2) {
 	
 }
 
-void MultiDNA::resetOutFilesAndFilter(){
+void OutputStreamer::resetOutFilesAndFilter(){
 #ifdef DEBUG
 	cerr << "resetOutFilesAndFilter" << endl;
 #endif
@@ -889,7 +889,7 @@ void MultiDNA::resetOutFilesAndFilter(){
 	totalFileStrms = 0;
 }
 
-void MultiDNA::closeOutStreams(bool wr){
+void OutputStreamer::closeOutStreams(bool wr){
 
 
 	write2File = true;
@@ -931,13 +931,13 @@ void MultiDNA::closeOutStreams(bool wr){
 #endif
 
 }
-/*void MultiDNA::resetOutStreams(){
+/*void OutputStreamer::resetOutStreams(){
 	if(qFile){qFile.seekp(qFilePos);}if(sFile){sFile.seekp(sFilePos);}if(fqFile){fqFile.seekp(fqFilePos); }
 	if(qFile2){qFile2.seekp(qFile2Pos);}if(sFile2){sFile2.seekp(sFile2Pos);}if(fqFile2){fqFile2.seekp(fqFile2Pos); }
 	if(qFileS){qFileS.seekp(qFileSPos);}if(sFileS){sFileS.seekp(sFileSPos);}if(fqFileS){fqFileS.seekp(fqFileSPos); }
 	if(qFileS2){qFileS2.seekp(qFileS2Pos);}if(sFileS2){sFileS2.seekp(sFileS2Pos);}if(fqFileS2){fqFileS2.seekp(fqFileS2Pos); }
 }*/
-void MultiDNA::openOFstream(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep, int wh) {
+void OutputStreamer::openOFstream(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep, int wh) {
 	switch (wh) {
 	case 1:
 		openOFstreamFNA(opOF, wrMode, p1, p2, errMsg, onlyPrep);
@@ -952,7 +952,7 @@ void MultiDNA::openOFstream(const string opOF, std::ios_base::openmode wrMode, i
 		cerr << "Wrong wh specified"; exit(1002);
 	}
 }
-void MultiDNA::openNoBCoutstrean(const string inS) {
+void OutputStreamer::openNoBCoutstrean(const string inS) {
 	vector<string> tfnaout = splitByCommas(inS);
 	fqNoBCFile.resize(2, NULL);
 	fqNoBCFile[0] = new ofstream(tfnaout[0], wrMode);
@@ -960,7 +960,7 @@ void MultiDNA::openNoBCoutstrean(const string inS) {
 
 }
 
-void MultiDNA::openOFstreamFQ(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep) {
+void OutputStreamer::openOFstreamFQ(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep) {
 	if (p2 > 3) { cerr << "internal error: can't have more than 4 entries in output file stream\n"; exit(1001); }
 	if (p1+1 >= (int)fqFile.size()) {
 		vector<ostream*> nullVec(4, NULL);
@@ -994,7 +994,7 @@ void MultiDNA::openOFstreamFQ(const string opOF, std::ios_base::openmode wrMode,
 		exit(4);
 	}
 }
-void MultiDNA::openOFstreamFNA(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep) {
+void OutputStreamer::openOFstreamFNA(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep) {
 	if (p2 > 3) { cerr << "internal error: can't have more than 4 entries in output file stream\n"; exit(1001); }
 	if (p1+1 >= (int)sFile.size()) {
 		vector<ostream*> nullVec(4, NULL);
@@ -1024,7 +1024,7 @@ void MultiDNA::openOFstreamFNA(const string opOF, std::ios_base::openmode wrMode
 		exit(4);
 	}
 }
-void MultiDNA::openOFstreamQL(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep) {
+void OutputStreamer::openOFstreamQL(const string opOF, std::ios_base::openmode wrMode, int p1, int p2, string errMsg, bool onlyPrep) {
 	if (p2 > 3) { cerr << "internal error: can't have more than 4 entries in output file stream\n"; exit(1001); }
 	if (p1+1 >= (int)qFile.size()) {
 		vector<ostream*> nullVec(4, NULL);
@@ -1055,7 +1055,7 @@ void MultiDNA::openOFstreamQL(const string opOF, std::ios_base::openmode wrMode,
 	}
 }
 
-void MultiDNA::openSeveralOutstreams(OptContainer& cmdArgs, shared_ptr<ReadSubset> RDS, std::ios_base::openmode wrMode) {
+void OutputStreamer::openSeveralOutstreams(OptContainer& cmdArgs, shared_ptr<ReadSubset> RDS, std::ios_base::openmode wrMode) {
 #ifdef DEBUG
 	cerr << " openining multiple out streams" << endl;
 #endif
@@ -1127,7 +1127,7 @@ void MultiDNA::openSeveralOutstreams(OptContainer& cmdArgs, shared_ptr<ReadSubse
 	}
 }
 
-void MultiDNA::openOutStreams(OptContainer& cmdArgs,int fileIt,std::ios_base::openmode wrMode_i, 
+void OutputStreamer::openOutStreams(OptContainer& cmdArgs,int fileIt,std::ios_base::openmode wrMode_i, 
 	string fileExt, int forceFmt){
 	this->setwriteMode(wrMode_i);
 	if ( suppressOutWrite == 3 || (cmdArgs["-o_fastq"] == "" && cmdArgs["-o_fna"] == "" && cmdArgs["-o_qual"] == "") ){
@@ -4575,8 +4575,9 @@ void UClinks::readDerepInfo(string dereM) {
 	
 }
 
-//read in dereplicated info feom derp.map
+//read in dereplicated info from derep.map and derep.hq.fq (in IS) -> they are in the same order
 void UClinks::oneDerepLine(shared_ptr<DNAunique> d) {
+	
 	if (MAPread){
 		return;
 	}
@@ -5323,7 +5324,7 @@ void UClinks::removeSizeStr(string& w) {
 	w = w.substr(0, idx);
 }
 
-void UClinks::writeNewSeeds(shared_ptr<MultiDNA> MD, shared_ptr<Filters> fil, bool refSeeds, bool printLnk) {
+void UClinks::writeNewSeeds(shared_ptr<OutputStreamer> MD, shared_ptr<Filters> fil, bool refSeeds, bool printLnk) {
 	if (!RefDBmode && refSeeds){ return; }
 	//ofstream O(outf.c_str());
 	int paired = fil->isPaired();

@@ -119,7 +119,7 @@ inline int FastqVerMod(int x){
 }
 
 
-class MultiDNA;
+class OutputStreamer;
 
 
 
@@ -220,7 +220,7 @@ public:
 	~ReadSubset(){}
 	bool multiFile() {		if (outFiles.size() > 1) { return true; } return false;	}
 	vector<string> getOFiles() { return outFiles; }
-	void findMatches(shared_ptr<InputStreamer>, shared_ptr<MultiDNA>,bool mocatFix);
+	void findMatches(shared_ptr<InputStreamer>, shared_ptr<OutputStreamer>,bool mocatFix);
 	void setRemainingFilepipe(int j) { RemainderStrPos = j; }
 private:
 	//-1 deactivates
@@ -297,7 +297,7 @@ public:
 	void BCintoHead(int idx, shared_ptr<DNA> d, const string, const int, bool, bool = false);
 	void setBCdna(int idx, shared_ptr<DNA> d){ d->setBCnumber(idx, BCoffset); }
 	void SampleIntoHead(const int idx, shared_ptr<DNA> d, const size_t pos);
-	void setMultiDNA(shared_ptr<MultiDNA> m) { lMD = m; }
+	void setMultiDNA(shared_ptr<OutputStreamer> m) { lMD = m; }
 	//stats... probably mutexed functions
 	bool doReversePrimers() { return bPrimerR; }
 	void preFilterSeqStat(shared_ptr<DNA> d,int pair);
@@ -458,7 +458,7 @@ protected:
 
 	vector<string> FastaF, QualF, FastqF, MIDfqF;
 	vector<int> derepMinNum;
-	shared_ptr<MultiDNA> lMD;
+	shared_ptr<OutputStreamer> lMD;
 	vector<shared_ptr<ReportStats>> RepStat;//2 entries (2 pairs)
 	vector<shared_ptr<ReportStats>> RepStatAddition;
 	shared_ptr<ReportStats> PreFiltP1; shared_ptr<ReportStats> PreFiltP2;
@@ -606,7 +606,7 @@ public:
 	UClinks(OptContainer& );
 	~UClinks();
 	void findSeq2UCinstruction(shared_ptr<InputStreamer>,bool, shared_ptr<Filters> );
-	void writeNewSeeds(shared_ptr<MultiDNA>, shared_ptr<Filters>,bool, bool=false);
+	void writeNewSeeds(shared_ptr<OutputStreamer>, shared_ptr<Filters>,bool, bool=false);
 	void printStats(ostream&);
 	void finishUCfile(shared_ptr<Filters>, string, bool);
 	void finishMAPfile();
@@ -676,13 +676,13 @@ private:
 
 
 //writes successful demultis and stores unsuccessful matches of fna/qual for later matching
-class MultiDNA{
+class OutputStreamer{
 public:
 	//wrStatus controls if this appends or overwrites output
-	MultiDNA(shared_ptr<Filters> filter, OptContainer& cmdArgs, 
+	OutputStreamer(shared_ptr<Filters> filter, OptContainer& cmdArgs, 
 		std::ios_base::openmode wrStatus, shared_ptr<ReadSubset>, 
 		string fileExt = "",int=-1);
-	~MultiDNA();
+	~OutputStreamer();
 	//	void threadAnalyzeDNA(shared_ptr<DNA>);
 	void setFastQWrite(bool x) { BWriteFastQ = x; BWriteQual = !x; }
 	void setQualWrite(bool x) { BWriteQual = x; }
