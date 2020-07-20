@@ -5349,6 +5349,7 @@ void UClinks::writeNewSeeds(shared_ptr<OutputStreamer> MD, shared_ptr<Filters> f
 		//if (i == 6628){			int x = 0;		}
 		//if check DNA was done before (remove rev primer), do it now
 		if (bestDNA[i] == NULL) {
+			//this should not happen on a regular lotus run
 			MD->writeAllStoredDNA();
 			cerr << "No seed sequence found for DNA " << oriKey[i] << ". Aborting..\n"; // " << bestDNA[i]->getOldID()<<"(
 			//continue;
