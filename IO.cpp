@@ -774,6 +774,9 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 #ifdef DEBUG
 	cerr << "separateByFile"<<endl;
 #endif
+
+//	mainFil->ini_filestruct(cmdArgs);
+	
 	vector<string> FastaF = mainFil->getFastaFiles();
 	vector<string> QualF = mainFil->getQualFiles();
 	vector<string> FastqF = mainFil->getFastqFiles();
@@ -828,38 +831,18 @@ void separateByFile(shared_ptr<Filters> mainFil,OptContainer& cmdArgs){
 	
 	string mainFile = "", outFile = cmdArgs["-o_fna"];
 	
-	//prepare for Seed extension or Read subselection, if requested
-	UClinks *ucl = NULL; shared_ptr<ReadSubset> RDSset; 
-	shared_ptr<Dereplicate> Dere ;
-	if (mainFil->doOptimalClusterSeq()){
-		ucl = new UClinks(cmdArgs);
-		if (cmdArgs.find("-mergedPairs") != cmdArgs.end() && cmdArgs["-mergedPairs"] == "1"){
-			ucl->pairedSeqsMerged(mainFil);
-		}
-		else {
-			mainFil->setFloatingEWin(10, 25);
-		}
-		//are fallback fasta sequences available?
-		if (cmdArgs["-OTU_fallback"] != ""){
-			shared_ptr<InputStreamer> FALL = make_shared<InputStreamer>(true, 
-				mainFil->getuserReqFastqVer(), cmdArgs["-ignore_IO_errors"], cmdArgs["-pairedRD_HD_out"]);
-			FALL->setupFna(cmdArgs["-OTU_fallback"]);
-			ucl->setupDefSeeds(FALL,mainFil);
-		}
-	}
-	else if (mainFil->doSubselReads()){
-		//this will select a list of reads and distribute these into multiple files
-		RDSset = make_shared<ReadSubset>(cmdArgs["-specificReads"],"");
-	} else if (mainFil->doDereplicate()) {
-		Dere = make_shared<Dereplicate>(cmdArgs);
-	}
+	//special sdm functions ini
+	UClinks *ucl = NULL; // Seed extension ?
+	shared_ptr<ReadSubset> RDSset;  //read subset filtered out?
+	shared_ptr<Dereplicate> Dere ; //dereplication of fasta input?
+	mainFil->ini_SeedExtension(ucl, RDSset, Dere); // actual prep
+
+
 	//needs to attach to existing file sometimes
 	std::ios_base::openmode writeStatus = ios_base::out;
 	bool shortStats = false;
 	string shrtLog = "";
-
-
-			// main loop that goes over different files
+	// main loop that goes over different files
 	int maxRds = mainFil->getXreads();
 	int totReadsRead(0);
 	//---------------------------------

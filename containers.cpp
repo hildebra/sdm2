@@ -1588,7 +1588,7 @@ string additionalFileName2(const string& in){
 //*******************************************
 
 
-Filters::Filters(OptContainer& cmdArgs) :
+Filters::Filters(OptContainer* cmdArgs1) :
 		PrimerL(0), PrimerR(0), PrimerL_RC(0), PrimerR_RC(0), PrimerIdx(0),
 		Barcode(0), revBarcode(0), Barcode2(0), revBarcode2(0),
 		HeadSmplID(0),
@@ -1633,7 +1633,8 @@ Filters::Filters(OptContainer& cmdArgs) :
 		bDoDereplicate(false), bDoCombiSamples(false),
 		bDoDemultiplexIntoFiles(false), 
 		maxReadsPerOFile(0),ReadsWritten(0),OFileIncre(0),
-		Barcode_len(0), Barcode2_len(0)
+		Barcode_len(0), Barcode2_len(0),
+		cmdArgs(cmdArgs1)
 //		dPDS(make_unique()), dHDS(make_unique())
 		{
 			
@@ -1645,11 +1646,11 @@ Filters::Filters(OptContainer& cmdArgs) :
 
 
 	string optF ("");
-	if (cmdArgs.find("-options") != cmdArgs.end()) {
-		optF = cmdArgs["-options"];
+	if (cmdArgs->find("-options") != cmdArgs->end()) {
+		optF = (*cmdArgs)["-options"];
 	}
 
-	iniSpacer = cmdArgs["-sample_sep"];
+	iniSpacer = (*cmdArgs)["-sample_sep"];
 	//***************************************
 	//default options
 	int maxAmb(0),PrimerErrs(1),TagErrs(0);
@@ -1665,31 +1666,31 @@ Filters::Filters(OptContainer& cmdArgs) :
 	bool addModConf = false;
 
 	//set up some basic objects
-	if ( cmdArgs.find("-paired") != cmdArgs.end() ) {
-		pairedSeq = atoi(cmdArgs["-paired"].c_str()); //fakeEssentials();
+	if ( (*cmdArgs).find("-paired") != cmdArgs->end() ) {
+		pairedSeq = atoi((*cmdArgs)["-paired"].c_str()); //fakeEssentials();
 		if ( pairedSeq<1 || pairedSeq>3 ) { cerr << "Argument \"-paired\" supplied with unknown parameter. Aborting.\n"; exit(28); }
-		if ( cmdArgs["-onlyPair"] == "1" || cmdArgs["-onlyPair"] == "2" ) {
+		if ( (*cmdArgs)["-onlyPair"] == "1" || (*cmdArgs)["-onlyPair"] == "2" ) {
 			pairedSeq = 1;
 		}
 	}
-	if (cmdArgs.find("-normRdsToFiveNTs") != cmdArgs.end()) {
+	if (cmdArgs->find("-normRdsToFiveNTs") != cmdArgs->end()) {
 		norm2fiveNTs = true;
 		cerr << "Warning: normRdsToFiveNTs is not implemented!\n";
 	}
 	//delimit output file size to X reads
-	if ( cmdArgs.find("-maxReadsPerOutput") != cmdArgs.end() ) {
-		maxReadsPerOFile = atoi(cmdArgs["-maxReadsPerOutput"].c_str());
+	if ( cmdArgs->find("-maxReadsPerOutput") != cmdArgs->end() ) {
+		maxReadsPerOFile = atoi((*cmdArgs)["-maxReadsPerOutput"].c_str());
 	}
 	//important for fastq format
-	if ( cmdArgs.find("-i_qual_offset") != cmdArgs.end() ) {
-		if ( cmdArgs["-i_qual_offset"] == "auto" ) {
+	if ( cmdArgs->find("-i_qual_offset") != cmdArgs->end() ) {
+		if ( (*cmdArgs)["-i_qual_offset"] == "auto" ) {
 			userReqFastqVer = 0;
 		} else {
-			userReqFastqVer = atoi(cmdArgs["-i_qual_offset"].c_str());
+			userReqFastqVer = atoi((*cmdArgs)["-i_qual_offset"].c_str());
 		}
 	}
-	//cerr<<cmdArgs["-o_qual_offset"]<<endl;
-	userReqFastqOutVer = atoi(cmdArgs["-o_qual_offset"].c_str());
+	//cerr<<(*cmdArgs)["-o_qual_offset"]<<endl;
+	userReqFastqOutVer = atoi((*cmdArgs)["-o_qual_offset"].c_str());
 	//statistic tracker
 	for ( size_t i = 0; i < 2; i++ ) {
 		RepStat[i] = make_shared<ReportStats>(true);
@@ -1698,14 +1699,14 @@ Filters::Filters(OptContainer& cmdArgs) :
 	PreFiltP1 = make_shared<ReportStats>(true);
 	PreFiltP2 = make_shared<ReportStats>(true);
 	//do new SEED sequence selection?
-	if ( cmdArgs.find("-optimalRead2Cluster") != cmdArgs.end() ) {
+	if ( cmdArgs->find("-optimalRead2Cluster") != cmdArgs->end() ) {
 		b_optiClusterSeq = true;
 	}
 	//do selection of specific reads?
-	if ( cmdArgs["-specificReads"] != "" ) {
+	if ( (*cmdArgs)["-specificReads"] != "" ) {
 		b_subselectionReads = true;
 	}
-	if (cmdArgs.find("-binomialFilterBothPairs") != cmdArgs.end() && cmdArgs["-binomialFilterBothPairs"] == "1") {
+	if (cmdArgs->find("-binomialFilterBothPairs") != cmdArgs->end() && (*cmdArgs)["-binomialFilterBothPairs"] == "1") {
 		b_BinFilBothPairs = true;
 	}
 	//***************************************
@@ -1736,8 +1737,8 @@ Filters::Filters(OptContainer& cmdArgs) :
 		getline(ss,segs,'\t');
 		getline(ss,segs2,'\t');
 
-		if (cmdArgs["-XfirstReads"] != "") {
-			Xreads = atoi(cmdArgs["-XfirstReads"].c_str());
+		if ((*cmdArgs)["-XfirstReads"] != "") {
+			Xreads = atoi((*cmdArgs)["-XfirstReads"].c_str());
 		}
 
 
@@ -1915,14 +1916,14 @@ Filters::Filters(OptContainer& cmdArgs) :
 	//alternative options (mid qual filtering)
 	if (addModConf){
 		if (!alt_bRequireRevPrimSet){alt_bRequireRevPrim = bRequireRevPrim;}
-		if (cmdArgs.find("-o_fna")  != cmdArgs.end() && cmdArgs["-o_fna"].length()>1){
-			if (cmdArgs.find("-o_fna2")  == cmdArgs.end()){
-				cmdArgs["-o_fna2"] = additionalFileName(cmdArgs["-o_fna"]);
-				//cmdArgs["-o_fna2"] = cmdArgs["-o_fna"].substr(0,cmdArgs["-o_fna"].length()-4)+".add.fna";
+		if (cmdArgs->find("-o_fna")  != cmdArgs->end() && (*cmdArgs)["-o_fna"].length()>1){
+			if (cmdArgs->find("-o_fna2")  == cmdArgs->end()){
+				(*cmdArgs)["-o_fna2"] = additionalFileName((*cmdArgs)["-o_fna"]);
+				//(*cmdArgs)["-o_fna2"] = (*cmdArgs)["-o_fna"].substr(0,(*cmdArgs)["-o_fna"].length()-4)+".add.fna";
 			}
-		} else if (cmdArgs.find("-o_fastq")  != cmdArgs.end() && cmdArgs["-o_fastq"].length()>1){
-			if (cmdArgs.find("-o_fastq2")  == cmdArgs.end()){
-				cmdArgs["-o_fastq2"] = additionalFileName(cmdArgs["-o_fastq"]);
+		} else if (cmdArgs->find("-o_fastq")  != cmdArgs->end() && (*cmdArgs)["-o_fastq"].length()>1){
+			if (cmdArgs->find("-o_fastq2")  == cmdArgs->end()){
+				(*cmdArgs)["-o_fastq2"] = additionalFileName((*cmdArgs)["-o_fastq"]);
 			}
 		}
 		bAdditionalOutput=true;
@@ -2039,15 +2040,46 @@ Filters::~Filters() {
 #endif
 }
 
+
+//service function to ini what needs to be done
+void Filters::ini_SeedExtension(UClinks *ucl, shared_ptr<ReadSubset>& RDSset, shared_ptr<Dereplicate>& Dere) {
+	if (this->doOptimalClusterSeq()) {
+		ucl = new UClinks((*cmdArgs));
+		if (cmdArgs->find("-mergedPairs") != cmdArgs->end() && (*cmdArgs)["-mergedPairs"] == "1") {
+			ucl->pairedSeqsMerged();
+			this->setFloatingEWin(0, 0.f);
+		}
+		else {
+			this->setFloatingEWin(10, 25);
+		}
+		//are fallback fasta sequences available?
+		if ((*cmdArgs)["-OTU_fallback"] != "") {
+			shared_ptr<InputStreamer> FALL = make_shared<InputStreamer>(true,
+				this->getuserReqFastqVer(), (*cmdArgs)["-ignore_IO_errors"], (*cmdArgs)["-pairedRD_HD_out"]);
+			FALL->setupFna((*cmdArgs)["-OTU_fallback"]);
+			ucl->setupDefSeeds(FALL, SampleID);
+		}
+	}
+	else if (this->doSubselReads()) {
+		//this will select a list of reads and distribute these into multiple files
+		RDSset = make_shared<ReadSubset>((*cmdArgs)["-specificReads"], "");
+	}
+	else if (this->doDereplicate()) {
+		Dere = make_shared<Dereplicate>((*cmdArgs));
+	}
+}
+
+
+
 //simulates that in mapping file links to sequence file was given.
-bool Filters::setcmdArgsFiles(OptContainer& cmdArgs){
+bool Filters::setcmdArgsFiles(){
 
 	if (FastqF.size()==0 && QualF.size()==0 && FastaF.size() > 0){
 		//fasta entry but no qual entries
 
 		string path="";
-		if (cmdArgs.find("-i_path")  != cmdArgs.end() && cmdArgs["-i_path"].length() > 2){
-			path=cmdArgs["-i_path"] + string("/");
+		if (cmdArgs->find("-i_path")  != cmdArgs->end() && (*cmdArgs)["-i_path"].length() > 2){
+			path=(*cmdArgs)["-i_path"] + string("/");
 		}
 
 		QualF.resize(FastaF.size());
@@ -2061,7 +2093,7 @@ bool Filters::setcmdArgsFiles(OptContainer& cmdArgs){
 			fin.open(fullQ.c_str(),ios::in);
 			if( fin.is_open() )	{
 				cerr<<"Using quality file: "<<fullQ <<endl;
-			} else if (cmdArgs.find("-number")!=  cmdArgs.end() && cmdArgs["-number"] =="T"){
+			} else if (cmdArgs->find("-number")!=  cmdArgs->end() && (*cmdArgs)["-number"] =="T"){
 				;
 			}else {
 				cerr<<"You did not supply a quality file for"<<path+ FastaF[i]<<". \nPlease give the path to your quality file as command line argument:\n  -i_qual <PathToQualityFile>\n";
@@ -2079,18 +2111,18 @@ bool Filters::setcmdArgsFiles(OptContainer& cmdArgs){
 
 	if (FastaF.size()==0 && FastqF.size()==0){
 		//set up fasta/fastq vector specific to corresponding BC (that should be in this file)
-		if (cmdArgs.find("-i_fastq")  == cmdArgs.end()){
+		if (cmdArgs->find("-i_fastq")  == cmdArgs->end()){
 			FastaF.resize(fileSiz);
 			QualF.resize(fileSiz);
 			for (unsigned int i=0; i< FastaF.size(); i++){
-				FastaF[i] = cmdArgs["-i_fna"];
-				QualF[i] = cmdArgs["-i_qual"];
+				FastaF[i] = (*cmdArgs)["-i_fna"];
+				QualF[i] = (*cmdArgs)["-i_qual"];
 			}
 		} else {//fastq input
-			vector<string> fqTmp (1,cmdArgs["-i_fastq"]);
-			if (cmdArgs["-i_fastq"].find(";") != string::npos) {//";" denotes several files
+			vector<string> fqTmp (1,(*cmdArgs)["-i_fastq"]);
+			if ((*cmdArgs)["-i_fastq"].find(";") != string::npos) {//";" denotes several files
 				if (fileSiz == 1) {//no BC, 
-					fqTmp = splitByCommas(cmdArgs["-i_fastq"], ';');
+					fqTmp = splitByCommas((*cmdArgs)["-i_fastq"], ';');
 					this->allResize((uint) fqTmp.size());
 					fileSiz = (int) fqTmp.size();
 					cerr << "Detected " << fileSiz << " input files (pairs)." << endl;
@@ -2099,29 +2131,29 @@ bool Filters::setcmdArgsFiles(OptContainer& cmdArgs){
 					cerr << "Fastq string contains symbol \";\". Not allowed in input string"; exit(32);
 				}
 			} else {
-				FastqF.resize(fileSiz, cmdArgs["-i_fastq"]);
+				FastqF.resize(fileSiz, (*cmdArgs)["-i_fastq"]);
 			}
 		}
 	}
 
 
 	if (MIDfqF.size() == 0)
-		if (cmdArgs.find("-i_MID_fastq") != cmdArgs.end()) {
+		if (cmdArgs->find("-i_MID_fastq") != cmdArgs->end()) {
 		MIDfqF.resize(fileSiz, "");
 		for (unsigned int i = 0; i < MIDfqF.size(); i++) {
-			MIDfqF[i] = cmdArgs["-i_MID_fastq"];
+			MIDfqF[i] = (*cmdArgs)["-i_MID_fastq"];
 		}
 	}
-	if (cmdArgs.find("-o_demultiplex") != cmdArgs.end()) {	
-		generateDemultiOutFiles(cmdArgs["-o_demultiplex"]);
+	if (cmdArgs->find("-o_demultiplex") != cmdArgs->end()) {	
+		generateDemultiOutFiles((*cmdArgs)["-o_demultiplex"]);
 	}
 		
 
-	if (cmdArgs["-o_dereplicate"] != "") {
+	if ((*cmdArgs)["-o_dereplicate"] != "") {
 		//check if file could exist
 		ofstream temp;
-		temp.open(cmdArgs["-o_dereplicate"].c_str(), ios::out);
-		if (!temp) { cerr << "Could not open outstream to dereplicated sequences:\n" << cmdArgs["- o_dereplicate"] << endl; exit(78); }
+		temp.open((*cmdArgs)["-o_dereplicate"].c_str(), ios::out);
+		if (!temp) { cerr << "Could not open outstream to dereplicated sequences:\n" << (*cmdArgs)["- o_dereplicate"] << endl; exit(78); }
 		temp.close();
 		bDoDereplicate = true;
 	}
@@ -2649,9 +2681,9 @@ bool Filters::checkXtra(shared_ptr<DNA> d, int pairPre, int &tagIdx) {
 
 	return true;
 }
-void Filters::noMapMode(OptContainer& cmdArgs){
+void Filters::noMapMode(){
 	string noMapTxt = "sdm run in No Map Mode.";
-	if (cmdArgs.find("-paired")  != cmdArgs.end() && (cmdArgs["-paired"]=="2" || cmdArgs["-paired"]=="2")){
+	if (cmdArgs->find("-paired")  != cmdArgs->end() && ((*cmdArgs)["-paired"]=="2" || (*cmdArgs)["-paired"]=="2")){
 		pairedSeq = 2; //fakeEssentials();
 		noMapTxt += " Using paired end sequencing files.";
 	}
@@ -3284,18 +3316,18 @@ bool Filters::cutPrimerRev(shared_ptr<DNA> d,int primerID,bool RC){
 
 	return true;
 }
-bool Filters::readMap(OptContainer& cmdArgs){
+bool Filters::readMap(){
 
-	if (cmdArgs.find("-map")  == cmdArgs.end()){
-		this->noMapMode(cmdArgs);
+	if (cmdArgs->find("-map")  == cmdArgs->end()){
+		this->noMapMode(  );
 		return true;
 	}
 
-	string MapF = cmdArgs["-map"];
+	string MapF = (*cmdArgs)["-map"];
 
 	string path = ""; bool pathMode = false;
-	if (cmdArgs.find("-i_path")  != cmdArgs.end() && cmdArgs["-i_path"].length() > 2){
-		path=cmdArgs["-i_path"] + string("/");
+	if (cmdArgs->find("-i_path")  != cmdArgs->end() && (*cmdArgs)["-i_path"].length() > 2){
+		path=(*cmdArgs)["-i_path"] + string("/");
 		pathMode = true;//check later if mapping file contains fasta/fastq
 	}
 
@@ -3386,7 +3418,7 @@ bool Filters::readMap(OptContainer& cmdArgs){
 		ss << line;
 		int tbcnt=0;
 
-		//cmdArgs["-i_MID_fastq"]
+		//(*cmdArgs)["-i_MID_fastq"]
 		while (getline(ss,segments,'\t')) {
 			trim(segments);
 			if (cnt==0){ //search for header
@@ -5148,7 +5180,7 @@ void UClinks::add2OTUmat(shared_ptr<DNAunique> d, int curCLID, matrixUnit rep) {
 	}
 }
 
-void UClinks::setupDefSeeds(shared_ptr<InputStreamer> FA, shared_ptr<Filters> fil) {
+void UClinks::setupDefSeeds(shared_ptr<InputStreamer> FA, const vector<string>& smpls) {
 	bool contRead = true; bool sync(false);
 	while (contRead) {
 		shared_ptr<DNA> tmpDNA = FA->getDNA(contRead, 0,sync);
@@ -5191,7 +5223,7 @@ void UClinks::setupDefSeeds(shared_ptr<InputStreamer> FA, shared_ptr<Filters> fi
 		readDerepInfo(derepMapFile);
 	} else {
 		//TODO: fix this smplnew
-		const vector<string>& smpls = fil->SampleID;
+//		const vector<string>& smpls = fil->SampleID;
 		for (uint i = 0; i < smpls.size(); i++) {
 			SmplIDs[smpls[i]] = (int)OTUmat.size();
 			if (i != OTUmat.size()) { cerr << "Err in setupDefSeeds\n"; exit(453); }

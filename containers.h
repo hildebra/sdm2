@@ -25,7 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#include <math.h>
 
 
-
+//fwd declaration
+class UClinks;
+class Dereplicate;
 
 //definitions
 
@@ -234,7 +236,7 @@ private:
 //class Filters does the main demultiplexing of raw DNA/QUAL data
 class Filters{
 public:
-	Filters(OptContainer&);
+	Filters(OptContainer*);
 	Filters(shared_ptr<Filters> of, int, bool = false);
 	~Filters();
 	void close_outFiles_demulti(){
@@ -242,6 +244,12 @@ public:
 			if (demultiSinglFiles[i][0] != NULL) { delete demultiSinglFiles[i][0]; } if (demultiSinglFiles[i][1] != NULL) {delete demultiSinglFiles[i][1]; }
 		}
 	}
+	//was previously in separateByFile()
+	//void ini_filestruct(OptContainer& cmdArgs);
+
+	void ini_SeedExtension(UClinks *ucl, shared_ptr<ReadSubset>& RDSset, 
+		shared_ptr<Dereplicate>& Dere);
+
 	//pair:-1: no Pair-Seq, 0,1=pair 1/2 (assumes MID BC)
 	//doSeeding: extract longes Seed //false, -1, -2
 	bool check(shared_ptr<DNA> in, bool doSeeding, int pair, int &tagIdx);// , bool checkBC = true);
@@ -250,7 +258,7 @@ public:
 	void setSeqLength(float minL, int maxL);
 	void setMaxAmb(int x) { MaxAmb = x; };
 	void setAvgMinQual(float x) { min_q = x; };
-	bool readMap(OptContainer&);
+	bool readMap();
 	void setPrimerErrs(int x) { PrimerErrs = x; }
 	void setTagErrs(int x) { TagErrs = x; }
 	void removePrimer(bool x) { BcutPrimer = x; }
@@ -264,7 +272,7 @@ public:
 	void setFloatingQWin(int width, float aveQ) { FQWwidth = width; FQWthr = aveQ; };
 	//partial: cut end of Seq that is below the window threshold
 	void setFloatingEWin(int width, float aveQ) { EWwidth = width; EWthr = aveQ; };
-	bool setcmdArgsFiles(OptContainer&);
+	bool setcmdArgsFiles();
 	bool remove_adapter(shared_ptr<DNA>);
 	vector<string> getFastaFiles() { return FastaF; }
 	vector<string> getQualFiles() { return QualF; }
@@ -428,7 +436,7 @@ protected:
 
 	void extractMap(int k, int cnt, int tbcnt, string & segments, bool);
 	void fakeEssentials(void);
-	void noMapMode(OptContainer& cmdArgs);
+	void noMapMode();
 	void reverseTS_all_BC();	
 	void reverseTS_all_BC2();
 
@@ -537,6 +545,7 @@ protected:
 	//double BC / het spacer collect stats
 	shared_ptr<dualPrimerDistrStats> dPDS;
 	shared_ptr<dualPrimerDistrStats> dHDS;
+	OptContainer* cmdArgs;
 };
 
 
@@ -592,10 +601,10 @@ public:
 	void printStats(ostream&);
 	void finishUCfile(shared_ptr<Filters>, string, bool);
 	void finishMAPfile();
-	void setupDefSeeds(shared_ptr<InputStreamer> FA, shared_ptr<Filters> fil);
+	void setupDefSeeds(shared_ptr<InputStreamer> FA, const vector<string>& smpls);
 	//to add "high qual" ref sequences
 	void addDefSeeds(shared_ptr<InputStreamer> FA, shared_ptr<Filters> fil);
-	void pairedSeqsMerged(shared_ptr<Filters> fil){ pairsMerge = true; fil->setFloatingEWin(0, 0.f); }
+	void pairedSeqsMerged(){ pairsMerge = true; }
 	void writeOTUmatrix(string, shared_ptr<Filters> fil);
 	void resetInputUcUp(){ UpUcFnd = false; }
 	void set2UC(){ UPARSE8up = false; }

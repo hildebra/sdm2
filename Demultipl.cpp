@@ -60,14 +60,15 @@ int main(int argc, char* argv[])
 #ifdef DEBUG
 	cerr << "Setting up Filter" << endl;
 #endif
-	shared_ptr<Filters> fil = make_shared<Filters>(cmdArgs);
-	bool bReads = fil->readMap(cmdArgs);
+	OptContainer* cmdArgsPt = &cmdArgs;
+	shared_ptr<Filters> fil = make_shared<Filters>(&cmdArgs);
+	bool bReads = fil->readMap();
 #ifdef DEBUG
 	cerr << "filter setup & map is read" << endl;
 #endif
 	if (!bReads){cerr<<"Failed to read Map.\n";exit(3);}
 	//cerr<<SAqualP[0]<<" "<<SAqualP[50];
-	fil->setcmdArgsFiles(cmdArgs);
+	fil->setcmdArgsFiles();
 	
 	clock_t tStart = clock();
 	//main function
