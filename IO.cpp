@@ -30,25 +30,7 @@ void threadAnalyzeDNA(shared_ptr<DNA> tdn, shared_ptr<OutputStreamer> MD,int thr
 	MD->analyzeDNA(tdn,thrCnt,-1,tagIdx);
 	MD->saveForWrite(tdn);
 }
-/*void trippleThreadAnalyzeDNA(shared_ptr<OutputStreamer> MD, shared_ptr<DNA> tdn,shared_ptr<DNA> tdn2,
-							 shared_ptr<DNA> MIDseq,bool changePHead){//,int thrCnt){
 
-
-	int thrCnt = 0;
-	vector<bool> chs = MD->analyzeDNA(tdn,tdn2,MIDseq,changePHead,thrCnt);
-
-	if (chs[0] && chs[1]){
-		MD->saveForWrite(tdn,1);
-		MD->saveForWrite(tdn2,2);
-	} else if (chs[0]){
-		MD->saveForWrite(tdn,3);
-		MD->getFilters(thrCnt)->colStats[0].singleton++;
-	} else if (chs[1]){
-		MD->saveForWrite(tdn2,4);
-		MD->getFilters(thrCnt)->colStats[1].singleton++;
-	}
-
-}*/
 
 void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_ptr<InputStreamer> IS){
 	//output files
@@ -101,8 +83,7 @@ void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_pt
 			MD->saveForWrite(tdn);
 		}
 #else
-		tdn1->fixQ0();
-		curFil->sTotalPlus(0);
+		curFil->sTotalPlus(0);//mutex
 		//bool Pr1 = curFil->findPrimer(tdn1, 0, false, 0);
 
 		int tagIdx(-2);
@@ -1235,7 +1216,7 @@ void rewriteNumbers(OptContainer& cmdArgs){
 }
 
 void Announce_sdm(){
-	cerr << endl << "This is sdm (simple demultiplexer) " << sdm_version << " " << sdm_status << "." << endl << endl;
+	cerr << endl << "This is sdm (simple demultiplexer) " << sdm_version << " " << sdm_status << ".\n" << endl ;
 }
 void help_head(){
 	cout <<"------------------------------\nThis is sdm version "<<sdm_version <<" "<< sdm_status <<" help print\n------------------------------\n"<<endl;

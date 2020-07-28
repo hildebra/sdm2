@@ -273,6 +273,8 @@ public:
 	bool getFwdPrimCut() { return FtsDetected.forward; }
 	void setRevPrimCut() { FtsDetected.reverse = true; }
 	void setFwdPrimCut() { FtsDetected.forward = true; }
+	void setDereplicated() { FtsDetected.dereplicated = true; }
+	bool isDereplicated() { return FtsDetected.dereplicated ; }
 	//only used in pre best seed step
 	//float getSeedScore() { return tempFloat; }
 	//void setSeedScore(float i) { tempFloat = (float)i; }
@@ -357,9 +359,11 @@ protected:
 
 	struct ElementsDetection{
 		bool forward; bool reverse;//primers detected
-		bool TA_cut; bool Barcode_detected;  bool Barcode_cut;
-		ElementsDetection() :forward(false), reverse(false), TA_cut(false), Barcode_detected(false), Barcode_cut(false) {}
-		void reset() { forward = false; reverse = false; TA_cut = false; Barcode_detected = false; Barcode_cut = false; }
+		bool TA_cut; bool Barcode_detected;  bool Barcode_cut; bool dereplicated;
+		ElementsDetection() :forward(false), reverse(false), TA_cut(false), Barcode_detected(false), 
+			Barcode_cut(false), dereplicated(false){}
+		void reset() { forward = false; reverse = false; TA_cut = false; Barcode_detected = false; 
+		Barcode_cut = false; dereplicated = false;	}
 	} FtsDetected;
 
 

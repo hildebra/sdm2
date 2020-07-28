@@ -639,6 +639,13 @@ void Filters::addDNAtoCStats(shared_ptr<DNA> d,int Pair) {
 			colStats[easyPair].QualWin++;
 		}
 	}
+	if (d->isDereplicated()) {
+		if (d->getBarcodeDetected() && !d->isPassed() && !d->isMidQual()) {
+			this->statAddDerepBadSeq(d->getBCnumber());
+
+		}
+	}
+
 	
 
 }
@@ -860,17 +867,12 @@ void OutputStreamer::attachDereplicator(shared_ptr<Dereplicate> de) {
 	}
 }*/
 void OutputStreamer::depPrep(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2) {
-	bool added = false;
 	if (!b_doDereplicate) {
 		return;
 	}
-	Derepl->addDNA(tdn, tdn2, added);
-	if (added){ 
-		cntDerep++; 
-		if (tdn->getBarcodeDetected() && !tdn->isPassed() && !tdn->isMidQual() ){
-			MFil->statAddDerepBadSeq(tdn->getBCnumber());
-					
-		}
+	Derepl->addDNA(tdn, tdn2);
+	if (tdn->isDereplicated()) {
+		cntDerep++;
 	}
 	
 }
@@ -1324,7 +1326,7 @@ totSize(0), tmpCnt(0), curBCoffset(0){
 	return true;
 }*/
 
-bool Dereplicate::addDNA( shared_ptr<DNA> d, shared_ptr<DNA> d2, bool& added) {
+bool Dereplicate::addDNA( shared_ptr<DNA> d, shared_ptr<DNA> d2) {
 	//1st build hash of DNA
 	if (!d->getBarcodeDetected()) {
 		if (d->getBCnumber() >= 0) {
@@ -1340,7 +1342,8 @@ bool Dereplicate::addDNA( shared_ptr<DNA> d, shared_ptr<DNA> d2, bool& added) {
 	//if (!) { return false; }
 	auto spotted = Tracker.find(tmp);
 	if (spotted != Tracker.end()) {// found something
-		added = true; //d->setMidQual(false); tmp->setMidQual(false);
+		//d->setMidQual(false); tmp->setMidQual(false);
+		d->setDereplicated();
 		//int idx (spotted->second);
 		(*spotted)->addSmpl(BCN);
 		if (pass && betterPreSeed(d, d2, (*spotted))) {
@@ -1360,7 +1363,8 @@ bool Dereplicate::addDNA( shared_ptr<DNA> d, shared_ptr<DNA> d2, bool& added) {
 		}
 		return false;//added to seeds
 	} else if (pass){
-		added = true; d->setMidQual(false);
+		d->setMidQual(false);
+		d->setDereplicated();
 		//create entry
 		//Tracker[seq] = (int)Dnas.size();
 		//shared_ptr<DNAunique> tmp = make_shared<DNAunique>(d, BCN);

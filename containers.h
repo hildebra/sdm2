@@ -332,25 +332,8 @@ public:
 	void prepStats();
 	void revConstellationCnts(int x) { revConstellationN += x; }//number of read pairs, where pair1/2 are changed (mo)
 	void addDNAtoCStats(shared_ptr<DNA> d,int);
-	//void sPrimerFail(int pair) { colStats[pair].PrimerFail++; }
-	//void sAvgQual(int pair) {  colStats[ pair].AvgQual++; } 
-	//void sQualWin(int pair) { colStats[pair].QualWin++; }
-	//void sBinomError(int pair,float Err) { colStats[pair].BinomialErr++; }//maybe collect later info on expected error?
-	//void sMaxAmbig(int pair) { colStats[pair].MaxAmb++; }
-	//void sHomoNT(int pair) {colStats[pair].HomoNT++; } 
-	//void sReversePrimerFnd(int pair) { colStats[ pair].RevPrimFound++; } 
-	//void sRevPrimerFail(int pair) { colStats[ pair].PrimerRevFail++; } 
-	//void sMinLength(int pair) {  colStats[pair].minL++; } 
-	//void sMinQTrim(int pair) {colStats[pair].minLqualTrim++; } 
-	//void sMaxLength(int pair) { colStats[ pair].maxL++; } 
-	//void sTagFail(int pair) { colStats[pair].TagFail++; } 
-	//void sTagCorrected(int pair) { colStats[ pair].suc_correct_BC++; }
-	//void sTagNotCorrected(int pair) { colStats[pair].fail_correct_BC++; }
 	void sTotalPlus(int pair) {  colStats[pair].total++; //colStats[pair].totalRejected++; 
-//		if (secondaryOutput()) {sTotalPlusXtra(pair);}
 	}
-	//void sTotalMinus(int pair) { colStats[pair].total--; colStats[pair].totalRejected--; }
-	//void sTotalPlusXtra(int pair) {	if (pair > 1) { return; } statAddition.total++; statAddition.totalRejected++;}
 	void addStats(shared_ptr<Filters>, vector<int>& idx);
 	void DNAstatLQ(shared_ptr<DNA> d, int pair,bool Add) {
 		if (Add) {
@@ -360,7 +343,6 @@ public:
 		}
 	}
 
-	//void sTrimmed(int pair) { colStats[pair].Trimmed++; } 
 	void printStats(ostream&, string, string, bool);
 	void printGC(ostream&,int);
 	string shortStats(const string &);
@@ -568,7 +550,7 @@ public:
 	}
 	int getHighestBCoffset() { return (int)BCN2SmplID.size(); }
 	//bool addDNA(shared_ptr<DNA> d);
-	bool addDNA( shared_ptr<DNA> d,shared_ptr<DNA> d2,bool& added);
+	bool addDNA( shared_ptr<DNA> d,shared_ptr<DNA> d2);
 	string writeDereplDNA(shared_ptr<Filters>);
 	void writeLog(string logF, string rep) {
 		ofstream logx;

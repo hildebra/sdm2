@@ -316,6 +316,8 @@ bool DNA::seal() {//DN = Seq.c_str();
 	//uppercase DNA
 	std::transform(Seq.begin(), Seq.end(), Seq.begin(), ::toupper);
 	SeqLength = Seq.length();
+	this->fixQ0();
+
 	return true;
 }
 
