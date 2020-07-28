@@ -716,8 +716,8 @@ public:
 	void revConstellationCnts(int x) { MFil->revConstellationCnts(x); }
 	//dereplication of DNA seqs
 	void attachDereplicator(shared_ptr<Dereplicate> de);
-	//void depPrep(shared_ptr<DNA>);
-	void depPrep(shared_ptr<DNA>,shared_ptr<DNA>);
+	//void dereplicateDNA(shared_ptr<DNA>);
+	void dereplicateDNA(shared_ptr<DNA>,shared_ptr<DNA>);
 	//debug function to look closer at nonBC reads
 	void writeNonBCReads(shared_ptr<DNA> d, shared_ptr<DNA> d2);
 	void setReadLimit(int x) { maxRdsOut = x; }

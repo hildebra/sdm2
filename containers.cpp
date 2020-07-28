@@ -857,14 +857,14 @@ void OutputStreamer::attachDereplicator(shared_ptr<Dereplicate> de) {
 	}
 }
 
-/*void OutputStreamer::depPrep(shared_ptr<DNA> tdn) {
+/*void OutputStreamer::dereplicateDNA(shared_ptr<DNA> tdn) {
 
 	if (b_doDereplicate && tdn->isPassed()) {
 		cntDerep++;
 		Derepl->addDNA(tdn);
 	}
 }*/
-void OutputStreamer::depPrep(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2) {
+void OutputStreamer::dereplicateDNA(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2) {
 	if (!b_doDereplicate) {
 		return;
 	}

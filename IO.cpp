@@ -61,34 +61,9 @@ void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_pt
 		}
 		//collect some info on general run parameters
 		curFil->preFilterSeqStat(tdn1, 0);
-
-
-		/*if (!tdn1->isPassed()){
-		MD->addNoHeadDNA(tdn1);
-		tdn1 = tdn2; tdn2 = new DNA("","");
-		continue;
-		}*/
-#ifdef _THREADED
-		if (Nthrds>0){
-			if (threadActive){
-				threads[thrCnt].join();
-			}
-
-			//threadAnalyzeDNA(MD,tdn);
-			threads[thrCnt] = std::thread(threadAnalyzeDNA,tdn,MD,thrCnt);
-			thrCnt++;
-			if (thrCnt >= Nthrds){
-				thrCnt=0;
-				threadActive=true;
-			}
-		} else { //single Core
-			MD->analyzeDNA(tdn);
-			MD->saveForWrite(tdn);
-		}
-#else
 		curFil->sTotalPlus(0);//mutex
-		//bool Pr1 = curFil->findPrimer(tdn1, 0, false, 0);
-
+		
+		//thread starts here
 		int tagIdx(-2);
 		if (true && checkReversedRead ) {
 			string presentBC(""); int c_err(0);
@@ -105,12 +80,16 @@ void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_pt
 		}
 		tagIdx = -2;
 		MD->analyzeDNA(tdn1, -1, -1, tagIdx);
+		//thread ends here
+
+
 		//here BC has to be correctly set within DNA object
-		MD->depPrep(tdn1,NULL);
+		MD->dereplicateDNA(tdn1,NULL);//run in extra thread?
 		curFil->write2Demulti(tdn1, 0,MD->getfastQoutVer());
 
 
 		//first save read in mem, then write if enough reads accumulate in mem
+		//extra thread for multithreading??
 		if (!MD->saveForWrite(tdn1)) {
 			cont = false;
 			break;
@@ -119,16 +98,8 @@ void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_pt
 			chkDerep++;
 		}
 
-#endif
 		//if (tdn!=NULL && ch1 != tdn->isPassed()){cerr<<"isPassed is != ch1! Aborting..\n";exit(12);}
 	}
-#ifdef _THREADED
-	if (threadActive){
-		for (uint i=0; i<threads.size();i++){
-			threads[i].join();
-		}
-	}
-#endif
 	MD->closeOutStreams();
 }
 
@@ -304,7 +275,7 @@ bool read_paired_DNAready(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2, shared_ptr<
 
 
 	//at this point the tagIDX *MUST* be correctly set + BCoffset (in the DNA object, tagIDX doesn;t matter)
-	MD->depPrep(tdn, tdn2);
+	MD->dereplicateDNA(tdn, tdn2);
 	MD->writeNonBCReads(tdn, tdn2);
 
 	int idx1 = 1; int idx2 = 2;
