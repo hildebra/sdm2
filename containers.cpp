@@ -359,8 +359,6 @@ void OutputStreamer::analyzeDNA(shared_ptr<DNA> d, int FilterUse, int pair,int& 
 	if (d==NULL){
 		return ;
 	}
-	//collect some info on general run parameters
-	MFil->preFilterSeqStat(d, pair);
 
 
 	if ( !MFil->doFilterAtAll() ) {
@@ -384,6 +382,10 @@ void OutputStreamer::analyzeDNA(shared_ptr<DNA> d, int FilterUse, int pair,int& 
 		cerr << "Invalid control path in analyzeDNA\n"; exit(55);
 		subFilter[FilterUse]->check(d, false, pair, idx);
 	}
+	if (idx == -1 ) {
+		d->setBarcodeDetected(false); 
+	}
+
 	//count this as failure if BC was present
 	//d->prepareWrite(fastQoutVer);
 }
@@ -394,14 +396,10 @@ vector<bool> OutputStreamer::analyzeDNA(shared_ptr<DNA> p1, shared_ptr<DNA> p2, 
 	//1st: check if DNA pointer valid
 	if (p1 == NULL){
 		ret[0] = false;
-	} else {
-		MFil->preFilterSeqStat(p1, 0);
-	}
+	} 
 	if (p2 == NULL){
 		ret[1] = false;
-	} else {
-		MFil->preFilterSeqStat(p2, 1);
-	}
+	} 
 	if (mid == NULL){//no MID? kill
 		ret[1] = false; ret[0] = false; return ret;
 	}
@@ -1329,9 +1327,6 @@ totSize(0), tmpCnt(0), curBCoffset(0){
 bool Dereplicate::addDNA( shared_ptr<DNA> d, shared_ptr<DNA> d2) {
 	//1st build hash of DNA
 	if (!d->getBarcodeDetected()) {
-		if (d->getBCnumber() >= 0) {
-			int yy = 0;
-		}
 		return false;
 	}
 	string seq = d->getSeqPseudo();
@@ -2233,6 +2228,9 @@ void Filters::reverseTS_all_BC2() {
 
 
 void Filters::preFilterSeqStat(shared_ptr<DNA> d, int pair) {
+	if (d == NULL) {
+		return;
+	}
 	if (pair <= 0) {
 		PreFiltP1->addDNAStats(d);
 	} else if (pair == 1) {
@@ -2968,9 +2966,7 @@ int Filters::cutTag(shared_ptr<DNA> d, bool isPair1) {
 		d->cutSeq(start, stop);
 		d->setBarcodeCut();
 		BCintoHead(idx, d, presentBC, c_err, isPair1);
-		if (startX != -1 && stopX != -1) {
-			int tmp = 0;
-		}
+		
 	}
 	return idx;
 }

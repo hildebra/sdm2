@@ -60,7 +60,6 @@ int main(int argc, char* argv[])
 #ifdef DEBUG
 	cerr << "Setting up Filter" << endl;
 #endif
-	OptContainer* cmdArgsPt = &cmdArgs;
 	shared_ptr<Filters> fil = make_shared<Filters>(&cmdArgs);
 	bool bReads = fil->readMap();
 #ifdef DEBUG

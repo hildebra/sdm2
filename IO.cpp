@@ -59,6 +59,9 @@ void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_pt
 #endif
 			break; 
 		}
+		//collect some info on general run parameters
+		curFil->preFilterSeqStat(tdn1, 0);
+
 
 		/*if (!tdn1->isPassed()){
 		MD->addNoHeadDNA(tdn1);
@@ -103,9 +106,6 @@ void read_single(OptContainer& cmdArgs, shared_ptr<OutputStreamer> MD, shared_pt
 		tagIdx = -2;
 		MD->analyzeDNA(tdn1, -1, -1, tagIdx);
 		//here BC has to be correctly set within DNA object
-		if (tagIdx == -1 ) {
-			tdn1->setBarcodeDetected(false); 
-		}
 		MD->depPrep(tdn1,NULL);
 		curFil->write2Demulti(tdn1, 0,MD->getfastQoutVer());
 
@@ -140,9 +140,11 @@ bool read_paired_DNAready(shared_ptr<DNA> tdn, shared_ptr<DNA> tdn2, shared_ptr<
 	if (tdn == NULL) { return true; } //|| tdn->length()==0
 
 	shared_ptr<Filters> curFil = MD->getFilters();
-
 	//register read at all with stat counter:
 	curFil->sTotalPlus(0); curFil->sTotalPlus(1);
+	//collect some info on general run parameters
+	curFil->preFilterSeqStat(tdn, 0);
+	curFil->preFilterSeqStat(tdn2, 1);
 
 	//prep some variables
 	int BCoffs = curFil->getBCoffset();
